@@ -1,5 +1,6 @@
 body {
   background-color: #eff0f3;
+  color: #2a2a2a;
 }
 
 .container {
@@ -8,6 +9,8 @@ body {
 }
 
 h1 {
+  font-family: 'Lobster', cursive;
+  color: #0d0d0d;
   margin-bottom: 20px;
 }
 
@@ -19,4 +22,27 @@ h1 {
   min-height: 300px;
   border: 2px solid black;
   margin: 5px auto;
+  touch-action: none;
+}
+
+#controls {
+  text-align: left;
+  width: 30vw;
+  min-width: 300px;
+  margin: auto;
+}
+
+#controls button {
+  margin-right: 5px;
+}
+
+#controls label {
+  margin-left: 10px;
+}
+
+@media (max-width: 1140px) {
+  #controls label {
+    margin-left: 0;
+    margin-top: 8px;
+  }
 }
