@@ -5,12 +5,8 @@ let y = 0
 
 const canvas = document.getElementById('my-canvas')
 
-console.log(canvas.clientWidth)
-console.log(canvas.clientHeight)
 canvas.setAttribute('width', String(canvas.clientWidth))
 canvas.setAttribute('height', String(canvas.clientHeight))
-console.log(canvas.getAttribute('width'))
-console.log(canvas.getAttribute('height'))
 
 const context = canvas.getContext('2d')
 context.lineWidth = 1
@@ -25,6 +21,8 @@ canvas.addEventListener('mousedown', (e) => {
 })
 
 canvas.addEventListener('mousemove', (e) => {
+  e.preventDefault()
+  e.stopPropagation()
   if (isDrawing) {
     if (erase) {
       eraseLine(context, x, y, e.offsetX, e.offsetY)
@@ -35,6 +33,19 @@ canvas.addEventListener('mousemove', (e) => {
     y = e.offsetY
   }
 })
+
+canvas.addEventListener(
+  'touchmove',
+  function (e) {
+    var touch = e.touches[0]
+    var mouseEvent = new MouseEvent('mousemove', {
+      offsetX: touch.clientX,
+      offsetY: touch.clientY,
+    })
+    canvas.dispatchEvent(mouseEvent)
+  },
+  false
+)
 
 window.addEventListener('mouseup', (e) => {
   if (isDrawing) {
