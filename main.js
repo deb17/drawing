@@ -39,8 +39,8 @@ canvas.addEventListener(
   function (e) {
     var touch = e.touches[0]
     var mouseEvent = new MouseEvent('mousemove', {
-      offsetX: touch.clientX,
-      offsetY: touch.clientY,
+      offsetX: touch.pageX,
+      offsetY: touch.pageY,
     })
     canvas.dispatchEvent(mouseEvent)
   },
