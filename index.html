@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="style.css" />
+
+    <title>Drawing app</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Drawing App</h1>
+      <button class="btn btn-primary btn-sm" id="new">New</button>
+      <button class="btn btn-primary btn-sm" id="draw">Draw</button>
+      <button class="btn btn-primary btn-sm" id="erase">Erase</button>
+      <button class="btn btn-primary btn-sm" id="save">Save</button>
+      <input type="color" id="color" />
+      <label>
+        Line width
+        <select name="" id="lnwidth">
+          <option value="1">1</option>
+          <option value="3">3</option>
+          <option value="6">6</option>
+          <option value="9">9</option>
+        </select>
+      </label>
+      <canvas id="my-canvas" width="400" height="400"></canvas>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
