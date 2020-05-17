@@ -14,15 +14,13 @@ context.strokeStyle = 'black'
 context.fillStyle = 'white'
 context.fillRect(0, 0, canvas.width, canvas.height)
 
-canvas.addEventListener('mousedown', (e) => {
+const downHandler = (e) => {
   x = e.offsetX
   y = e.offsetY
   isDrawing = true
-})
+}
 
-canvas.addEventListener('mousemove', (e) => {
-  e.preventDefault()
-  e.stopPropagation()
+const moveHandler = (e) => {
   if (isDrawing) {
     if (erase) {
       eraseLine(context, x, y, e.offsetX, e.offsetY)
@@ -32,22 +30,9 @@ canvas.addEventListener('mousemove', (e) => {
     x = e.offsetX
     y = e.offsetY
   }
-})
+}
 
-canvas.addEventListener(
-  'touchmove',
-  function (e) {
-    var touch = e.touches[0]
-    var mouseEvent = new MouseEvent('mousemove', {
-      offsetX: touch.pageX,
-      offsetY: touch.pageY,
-    })
-    canvas.dispatchEvent(mouseEvent)
-  },
-  false
-)
-
-window.addEventListener('mouseup', (e) => {
+const upHandler = (e) => {
   if (isDrawing) {
     if (erase) {
       eraseLine(context, x, y, e.offsetX, e.offsetY)
@@ -58,7 +43,17 @@ window.addEventListener('mouseup', (e) => {
     y = 0
     isDrawing = false
   }
-})
+}
+
+if (window.PointerEvent) {
+  canvas.addEventListener('pointerdown', downHandler)
+  canvas.addEventListener('pointermove', moveHandler)
+  window.addEventListener('pointerup', upHandler)
+} else {
+  canvas.addEventListener('mousedown', downHandler)
+  canvas.addEventListener('mousemove', moveHandler)
+  window.addEventListener('mouseup', upHandler)
+}
 
 const drawLine = (context, x1, y1, x2, y2) => {
   context.beginPath()
@@ -80,9 +75,11 @@ const eraseLine = (context, x1, y1, x2, y2) => {
 
 const clearCanvas = () => {
   context.clearRect(0, 0, canvas.width, canvas.height)
-  erase = false
+  context.fillStyle = 'white'
+  context.fillRect(0, 0, canvas.width, canvas.height)
   context.strokeStyle = document.getElementById('color').value
   context.lineWidth = document.getElementById('lnwidth').value
+  erase = false
 }
 
 const download = () => {
